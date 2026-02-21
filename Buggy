@@ -1,4 +1,4 @@
--- Fighter Noob
+-- Fighter NoobA
 return {[1]={surface={Top="Studs";Front="Smooth";Bottom="Inlet";Right="Smooth";Left="Smooth";Back="Smooth";};
 reflectance=0;color={[1]=17.00000088661909;[2]=17.00000088661909;[3]=17.00000088661909;};
 anchored=true;mesh={meshid="rbxassetid://132893502653560";meshtype="FileMesh";vertexcolor={[1]=1;[2]=1;[3]=1;};
