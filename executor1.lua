@@ -14,7 +14,7 @@
 -- Execute button calls loadstring() on the server.
 -- ============================================================
 
-local OWNER_ID = 0  -- ← REPLACE with your Roblox UserId (numbers only)
+local OWNER_ID = 846325069  -- ← REPLACE with your Roblox UserId (numbers only)
 -- You can find your UserId at: https://www.roblox.com/users/profile
 -- Example: local OWNER_ID = 123456789
 
