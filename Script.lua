@@ -1,7 +1,7 @@
 -- // Place this file on GitHub
 -- // Load it with: loadstring(game:GetService("HttpService"):GetAsync("YOUR_RAW_URL"))()
 
-local OWNER_ID = 1234567 -- REPLACE WITH YOUR USER ID
+local OWNER_ID = 846325069 -- REPLACE WITH YOUR USER ID
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
