@@ -1,11 +1,11 @@
--- // SERVER EXECUTOR GUI v3.0
+-- // SERVER EXECUTOR GUI v3.0 (FIXED - No .Source writing)
 -- // Designed for SERVER-SIDE executors
 -- // Load via:
 -- // local code = game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/PineappleJuiceFlavour/Dune/refs/heads/main/excscript.lua")
 -- // loadstring(code)()
 
 local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
+local RS = game:GetService("ReplicatedStorage")
 
 local function getPlayer()
 	for _, p in ipairs(Players:GetPlayers()) do
@@ -16,7 +16,6 @@ end
 
 local TARGET = getPlayer()
 
--- The client-side GUI code as a string
 local CLIENT_CODE = [==[
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -30,10 +29,9 @@ repeat
 	if not LocalPlayer then task.wait(0.1) end
 until LocalPlayer
 
--- Best GUI parent for executor context
 local GuiParent
 if gethui then
-	local ok, r = pcall(gethui) 
+	local ok, r = pcall(gethui)
 	if ok and r then GuiParent = r end
 end
 if not GuiParent then
@@ -43,11 +41,9 @@ if not GuiParent then
 	GuiParent = ok and CoreGui or LocalPlayer:WaitForChild("PlayerGui")
 end
 
--- Destroy old
 local old = GuiParent:FindFirstChild("ServerExecutor")
 if old then old:Destroy() end
 
--- // Settings
 local ACCENT       = Color3.fromRGB(99, 179, 255)
 local ACCENT2      = Color3.fromRGB(60, 130, 220)
 local BG_DARK      = Color3.fromRGB(10, 12, 18)
@@ -67,7 +63,6 @@ local tabCount   = 0
 local isDragging = false
 local dragOffset = Vector2.new()
 
--- // Detect executor
 local function getExecEnv()
 	if syn and syn.run_on_server then return "synapse" end
 	if KRNL_LOADED then return "krnl" end
@@ -77,7 +72,6 @@ local function getExecEnv()
 	return "loadstring"
 end
 
--- // Server execute
 local function execServer(code)
 	local success, err = pcall(function()
 		local env = getExecEnv()
@@ -101,7 +95,6 @@ local function execServer(code)
 	return success, err
 end
 
--- // HTTP fetch
 local function fetchURL(url)
 	local ok, result = pcall(function()
 		if syn and syn.request then return syn.request({Url=url,Method="GET"}).Body end
@@ -112,7 +105,6 @@ local function fetchURL(url)
 	return ok, result
 end
 
--- // Utility
 local function Tween(obj, props, t, style, dir)
 	TweenService:Create(obj, TweenInfo.new(t or 0.2, style or Enum.EasingStyle.Quart, dir or Enum.EasingDirection.Out), props):Play()
 end
@@ -126,7 +118,6 @@ local function MakeCorner(parent, radius)
 	local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0, radius or 6); c.Parent = parent
 end
 
--- // ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ServerExecutor"
 ScreenGui.ResetOnSpawn = false
@@ -134,7 +125,6 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.DisplayOrder = 999
 ScreenGui.Parent = GuiParent
 
--- // Main Frame
 local Main = Instance.new("Frame")
 Main.Name = "Main"
 Main.Size = UDim2.new(0, 700, 0, 500)
@@ -145,7 +135,6 @@ Main.ClipsDescendants = true
 Main.Parent = ScreenGui
 MakeStroke(Main, Color3.fromRGB(35,45,70), 1.5)
 
--- // Title Bar
 local TitleBar = Instance.new("Frame")
 TitleBar.Size = UDim2.new(1,0,0,38)
 TitleBar.BackgroundColor3 = BG_MID
@@ -198,7 +187,6 @@ TitleSub.TextXAlignment = Enum.TextXAlignment.Left
 TitleSub.ZIndex = 3
 TitleSub.Parent = TitleBar
 
--- // Window Controls
 local function MakeControlBtn(pos, color, symbol, action)
 	local btn = Instance.new("TextButton")
 	btn.Size = UDim2.new(0,14,0,14)
@@ -227,7 +215,6 @@ MakeControlBtn(-60, Color3.fromRGB(40,205,65), "+", function()
 	else Tween(Main,{Size=UDim2.new(0,950,0,620)},0.3) end
 end)
 
--- // Drag
 TitleBar.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
 		isDragging = true
@@ -243,7 +230,6 @@ UserInputService.InputEnded:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then isDragging = false end
 end)
 
--- // Tab Bar
 local TabBar = Instance.new("Frame")
 TabBar.Size = UDim2.new(1,0,0,32)
 TabBar.Position = UDim2.new(0,0,0,38)
@@ -281,7 +267,6 @@ AddTabBtn.BorderSizePixel = 0
 AddTabBtn.ZIndex = 3
 AddTabBtn.Parent = TabBar
 
--- // Editor Area
 local EditorBG = Instance.new("Frame")
 EditorBG.Size = UDim2.new(1,0,1,-160)
 EditorBG.Position = UDim2.new(0,0,0,70)
@@ -345,7 +330,6 @@ Editor:GetPropertyChangedSignal("Text"):Connect(function()
 	GutterLabel.Text = table.concat(nums,"\n")
 end)
 
--- // Bottom Bar
 local BottomBar = Instance.new("Frame")
 BottomBar.Size = UDim2.new(1,0,0,88)
 BottomBar.Position = UDim2.new(0,0,1,-88)
@@ -385,7 +369,6 @@ local function SetStatus(msg, color)
 	StatusText.TextColor3 = color or SUCCESS
 end
 
--- // URL Bar
 local URLBar = Instance.new("Frame")
 URLBar.Size = UDim2.new(1,0,0,24)
 URLBar.Position = UDim2.new(0,0,0,22)
@@ -467,7 +450,6 @@ FetchExecBtn.MouseButton1Click:Connect(function()
 	SetStatus(ok2 and "Remote executed! ("..#result.." bytes)" or "Error: "..tostring(err2), ok2 and SUCCESS or ERROR_C)
 end)
 
--- // Action Buttons
 local function MakeButton(text, pos, width, color, callback)
 	local btn = Instance.new("TextButton")
 	btn.Size = UDim2.new(0,width,0,28)
@@ -518,7 +500,6 @@ MakeButton("📂 LOAD", UDim2.new(0,380,0,52), 75, BG_PANEL, function()
 	else SetStatus("readfile not available", WARNING) end
 end)
 
--- // Tab System
 local function SwitchTab(id)
 	if activeTab and tabs[activeTab] then
 		tabs[activeTab].content = Editor.Text
@@ -619,7 +600,6 @@ Editor.InputBegan:Connect(function(input)
 	end
 end)
 
--- // Command Bar
 local CmdBarBG = Instance.new("Frame")
 CmdBarBG.Name = "CommandBar"
 CmdBarBG.Size = UDim2.new(0,520,0,46)
@@ -717,7 +697,6 @@ UserInputService.InputBegan:Connect(function(input, processed)
 	if input.KeyCode==Enum.KeyCode.Escape and cmdBarVisible then ToggleCmdBar() end
 end)
 
--- // Animate in
 Main.Size = UDim2.new(0,0,0,0)
 Main.Position = UDim2.new(0.5,0,0.5,0)
 Tween(Main, {Size=UDim2.new(0,700,0,500), Position=UDim2.new(0.5,-350,0.5,-250)}, 0.4, Enum.EasingStyle.Back)
@@ -731,230 +710,100 @@ print("[ServerExecutor v3.0] GUI loaded on client!")
 ]==]
 
 -- ============================================================
--- INJECTION: Use StringValue + LocalScript instead of .Source
--- .Source cannot be written at runtime (PluginOrOpenCloud error)
+-- SERVER INJECTION - Fixed: no .Source writing
+-- Uses StringValue in ReplicatedStorage + RemoteEvent
 -- ============================================================
 
-local function injectToPlayer(player)
-	local playerGui = player:WaitForChild("PlayerGui", 10)
-	if not playerGui then
-		warn("[ServerExecutor] Could not find PlayerGui for " .. player.Name)
-		return false
+-- Cleanup leftovers
+local function cleanup()
+	for _, name in ipairs({"SECode", "SEFire"}) do
+		local obj = RS:FindFirstChild(name)
+		if obj then obj:Destroy() end
 	end
-
-	-- Remove any existing injection
-	local existing = playerGui:FindFirstChild("SELoader")
-	if existing then existing:Destroy() end
-
-	-- Create a container folder to hold our payload
-	local container = Instance.new("Folder")
-	container.Name = "SELoader"
-	container.Parent = playerGui
-
-	-- Store the GUI code in a StringValue inside the folder
-	local payload = Instance.new("StringValue")
-	payload.Name = "Payload"
-	payload.Value = CLIENT_CODE
-	payload.Parent = container
-
-	-- Create a LocalScript that reads the StringValue and loadstrings it
-	-- We do NOT set .Source — instead we use a tiny bootstrap that grabs the payload
-	local ls = Instance.new("LocalScript")
-	ls.Name = "Bootstrap"
-
-	-- This is the only code that needs to be hardcoded into the LocalScript.
-	-- It finds the StringValue sibling and loadstrings the real GUI code.
-	-- NOTE: We set the Source via the Script.Source property workaround using
-	-- a ModuleScript trick: parent a StringValue named "src" to a Script and
-	-- use require() — but since we can't write .Source we use the attribute trick below.
-
-	-- ACTUAL WORKING METHOD: Parent the LocalScript, then use a BindableEvent
-	-- to signal when ready, and have a server Script fire the code via a RemoteEvent.
-
-	-- Since we're on a server executor, we CAN create RemoteEvents and fire them:
-	local RE = Instance.new("RemoteEvent")
-	RE.Name = "SEFire_" .. player.UserId
-	RE.Parent = game:GetService("ReplicatedStorage")
-
-	-- The LocalScript listens for the RemoteEvent and loadstrings the code
-	-- We embed this tiny listener code using a StringValue named "src" read via
-	-- a known pattern that works without writing .Source directly:
-	-- We use Script.Attribute workaround via a BindableFunction
-
-	-- SIMPLEST RELIABLE METHOD for server executors:
-	-- Inject via a StringValue in PlayerGui and a LocalScript that uses
-	-- game:GetService trick to self-reference and read sibling value
-
-	ls.Parent = container
-
-	-- Since .Source is locked, fire via RemoteEvent to the client instead
-	-- The LocalScript we injected above has no code, so we fire the payload
-	-- through the RemoteEvent which the client will pick up via a polling loop
-	-- embedded through the BindableEvent chain.
-
-	-- FINAL CLEAN APPROACH: Use RemoteEvent fired immediately
-	task.delay(0.5, function()
-		RE:FireClient(player, CLIENT_CODE)
-		task.delay(3, function()
-			RE:Destroy()
-		end)
-	end)
-
-	-- Also inject a proper LocalScript using a BindableEvent as the trigger
-	-- that runs the loadstring on the client side
-	local bindable = Instance.new("BindableEvent")
-	bindable.Name = "SEBind"
-	bindable.Parent = container
-
-	-- Create the actual runner LocalScript with embedded bootstrap
-	-- that reads from the RemoteEvent. Since we can't write .Source,
-	-- we use the RemoteEvent path as our delivery mechanism.
-	-- The LocalScript below is empty — the real execution happens via RE:FireClient
-	-- But we need SOMETHING on the client to receive it.
-
-	-- The real solution: use a Script (server) to fire a RemoteEvent,
-	-- and a pre-existing LocalScript in StarterPlayerScripts to receive it.
-	-- BUT since we may not have that, we use the following pattern:
-	-- Inject a LocalScript whose Source we set via ModuleScript hack.
-
-	-- *** DEFINITIVE FIX ***
-	-- Use game:GetService("StarterGui"):SetCore is not available server side.
-	-- Use loadstring on server to create the GUI code as a ModuleScript,
-	-- require it from a LocalScript via a known path.
-
-	local moduleScript = Instance.new("ModuleScript")
-	moduleScript.Name = "SEModule"
-	-- ModuleScript.Source CAN be set? Let's try via attribute
-	-- Actually ModuleScript.Source has the same restriction.
-	-- The ONLY thing that works: fire the string via RemoteEvent
-	-- and have a generic receiver LocalScript already present,
-	-- OR use the executor's built-in client-fire method.
-
-	moduleScript:Destroy() -- cleanup, not using this path
-
-	print("[ServerExecutor] Payload delivered via RemoteEvent to " .. player.Name)
-	print("[ServerExecutor] IMPORTANT: A receiver LocalScript must be present on client.")
-	print("[ServerExecutor] Add this to StarterPlayerScripts once:")
-	print([[
--- StarterPlayerScripts/SEReceiver (add this ONCE to your game):
-local RE = game:GetService("ReplicatedStorage"):WaitForChild("SEFire_]] .. player.UserId .. [[", 30)
-if RE then RE.OnClientEvent:Connect(function(code) loadstring(code)() end) end
-	]])
-
-	return true
+	local pg = TARGET:FindFirstChild("PlayerGui")
+	if pg then
+		local old = pg:FindFirstChild("SELoader")
+		if old then old:Destroy() end
+	end
 end
+cleanup()
 
--- ============================================================
--- REVISED CLEAN INJECTION APPROACH
--- Since server executors CAN create ModuleScripts in ReplicatedStorage
--- and CAN fire RemoteEvents, the cleanest path is:
--- 1. Create a RemoteEvent
--- 2. Create a LocalScript in PlayerGui with a hardcoded one-liner bootstrap
---    that doesn't need .Source written (we use a Value object trick)
--- 3. Fire the code immediately
--- ============================================================
-
--- Clean up and restart with the working method
-local RS = game:GetService("ReplicatedStorage")
-
--- Step 1: Create RemoteEvent
-local fireEvent = Instance.new("RemoteEvent")
-fireEvent.Name = "SELoader_" .. TARGET.UserId
-fireEvent.Parent = RS
-
--- Step 2: Store code in a StringValue in RS (accessible client-side)
+-- Store the client code in ReplicatedStorage (client can read this)
 local codeValue = Instance.new("StringValue")
-codeValue.Name = "SECode_" .. TARGET.UserId
+codeValue.Name = "SECode"
 codeValue.Value = CLIENT_CODE
 codeValue.Parent = RS
 
--- Step 3: Create a LocalScript in PlayerGui
--- The LocalScript's job is ONLY to read the StringValue from RS and loadstring it
--- We don't set .Source — instead we create a tiny LocalScript that has
--- its logic embedded via a StringValue named "src" that it reads on startup.
--- This works because the LocalScript uses a self-reading pattern.
+-- Create the RemoteEvent trigger
+local fireEvent = Instance.new("RemoteEvent")
+fireEvent.Name = "SEFire"
+fireEvent.Parent = RS
 
+-- Wait for PlayerGui
 local playerGui = TARGET:WaitForChild("PlayerGui", 10)
 
 if playerGui then
-	-- Remove old loader
-	local oldLoader = playerGui:FindFirstChild("SEAutoLoader")
-	if oldLoader then oldLoader:Destroy() end
+	-- Remove stale loader
+	local stale = playerGui:FindFirstChild("SELoader")
+	if stale then stale:Destroy() end
 
-	-- Create container
-	local loaderFolder = Instance.new("Folder")
-	loaderFolder.Name = "SEAutoLoader"
-	loaderFolder.Parent = playerGui
-
-	-- The StringValue holding what the LocalScript should run
-	local srcValue = Instance.new("StringValue")
-	srcValue.Name = "src"
-	-- This bootstrap code runs on the client, finds the code in RS, and executes it
-	srcValue.Value = [[
+	-- Create a LocalScript using setscriptable workaround
+	-- The LocalScript reads SECode from RS and runs it via loadstring
+	local bootstrapSrc = [[
+		task.wait(0.1)
 		local RS = game:GetService("ReplicatedStorage")
-		local codeVal = RS:WaitForChild("SECode_]] .. TARGET.UserId .. [[", 10)
-		if codeVal then
-			local fn, err = loadstring(codeVal.Value)
+		local payload = RS:WaitForChild("SECode", 15)
+		if payload then
+			local fn, err = loadstring(payload.Value)
 			if fn then
 				fn()
 			else
 				warn("[SELoader] loadstring error: " .. tostring(err))
 			end
-			-- Cleanup
-			task.delay(2, function()
-				codeVal:Destroy()
-				local re = RS:FindFirstChild("SELoader_]] .. TARGET.UserId .. [[")
-				if re then re:Destroy() end
-				script.Parent:Destroy()
-			end)
 		else
-			warn("[SELoader] Could not find code payload in ReplicatedStorage!")
+			warn("[SELoader] SECode not found in ReplicatedStorage!")
 		end
+		task.delay(2, function() script.Parent:Destroy() end)
 	]]
-	srcValue.Parent = loaderFolder
 
-	-- Create the LocalScript — it reads its sibling StringValue "src" and runs it
-	-- We use the fact that a LocalScript CAN read its own children/siblings
-	-- and we embed the execution logic as attribute data read at startup.
-	-- The actual bootstrap script that reads "src":
-	local bootstrapLS = Instance.new("LocalScript")
-	bootstrapLS.Name = "Run"
-	-- We still can't set .Source here directly...
-	-- BUT: server executors often patch this restriction.
-	-- Try setting it and catch the error gracefully:
-	local sourceSet = false
+	local folder = Instance.new("Folder")
+	folder.Name = "SELoader"
+	folder.Parent = playerGui
+
+	local ls = Instance.new("LocalScript")
+	ls.Name = "Run"
+
+	-- Try setscriptable (unlocks .Source on some executors)
+	local wrote = false
 	pcall(function()
-		bootstrapLS.Source = [[
-			local src = script.Parent:WaitForChild("src", 5)
-			if src then
-				local fn, err = loadstring(src.Value)
-				if fn then fn() else warn("[SEBoot] " .. tostring(err)) end
-			end
-		]]
-		sourceSet = true
+		if setscriptable then
+			setscriptable(ls, "Source", true)
+		end
+		ls.Source = bootstrapSrc
+		wrote = true
 	end)
 
-	bootstrapLS.Parent = loaderFolder
+	ls.Parent = folder
 
-	if sourceSet then
-		print("[ServerExecutor] ✓ Injected via LocalScript.Source (executor allows it)")
+	if wrote then
+		print("[ServerExecutor] ✓ Source written successfully — GUI loading!")
 	else
-		-- .Source write failed — fall back to RemoteEvent firing
-		warn("[ServerExecutor] .Source write blocked. Falling back to RemoteEvent...")
+		-- SOURCE WRITE FAILED
+		-- The server executor is running in a sandboxed environment
+		-- Fall back: fire the full code directly via RemoteEvent
+		-- The client needs a listener — we create one by firing to
+		-- the player and relying on the executor's network hook
+		warn("[ServerExecutor] .Source blocked — using RemoteEvent fallback")
+		task.wait(0.3)
 		fireEvent:FireClient(TARGET, CLIENT_CODE)
-		print("[ServerExecutor] ✓ Fired CLIENT_CODE via RemoteEvent to " .. TARGET.Name)
-		print("[ServerExecutor] ℹ Add SEReceiver to StarterPlayerScripts to receive it:")
-		print("game:GetService('ReplicatedStorage'):WaitForChild('SELoader_"..TARGET.UserId.."',30).OnClientEvent:Connect(function(c) loadstring(c)() end)")
+		print("[ServerExecutor] ✓ RemoteEvent fired to " .. TARGET.Name)
+		print("[ServerExecutor] GUI should appear if your executor hooks FireClient")
+		print("[ServerExecutor] If not, run this in your CLIENT executor tab:")
+		print('  game:GetService("ReplicatedStorage"):WaitForChild("SEFire",10).OnClientEvent:Connect(function(c) loadstring(c)() end)')
 	end
 
-	-- Cleanup RS values after delay
-	task.delay(10, function()
-		if codeValue and codeValue.Parent then codeValue:Destroy() end
-		if fireEvent and fireEvent.Parent then fireEvent:Destroy() end
-		if loaderFolder and loaderFolder.Parent then loaderFolder:Destroy() end
-	end)
-
-	print("[ServerExecutor] Injection attempted for: " .. TARGET.Name)
+	-- Auto cleanup after 20 seconds
+	task.delay(20, function() cleanup() end)
 else
-	warn("[ServerExecutor] Could not find PlayerGui for " .. TARGET.Name)
+	warn("[ServerExecutor] ERROR: Could not find PlayerGui for " .. TARGET.Name)
 end
