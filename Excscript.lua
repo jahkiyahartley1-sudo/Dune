@@ -1,6 +1,6 @@
 -- // SERVER EXECUTOR GUI v3.0
--- // GitHub Raw Loadable - use:
--- // local code = game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/PineappleJuiceFlavour/Dune/refs/heads/main/Script.lua")
+-- // GitHub Raw Loadable:
+-- // local code = game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/PineappleJuiceFlavour/Dune/refs/heads/main/excscript.lua")
 -- // loadstring(code)()
 -- // Press M to toggle Command Bar | Ctrl+Enter to Execute
 
@@ -10,22 +10,20 @@ local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
 
--- Wait for LocalPlayer to exist (needed when loaded via HttpService loadstring)
-local LocalPlayer = Players.LocalPlayer
-if not LocalPlayer then
-	LocalPlayer = Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+-- Robust LocalPlayer wait - works in ALL executor loadstring contexts
+local LocalPlayer
+repeat
 	LocalPlayer = Players.LocalPlayer
-end
+	if not LocalPlayer then task.wait(0.1) end
+until LocalPlayer
 
--- Wait for PlayerGui safely
-local PlayerGui = LocalPlayer:FindFirstChild("PlayerGui")
-if not PlayerGui then
-	PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 10)
-end
-if not PlayerGui then
-	warn("[ServerExecutor] Could not find PlayerGui - aborting.")
-	return
-end
+-- Robust PlayerGui wait
+local PlayerGui
+repeat
+	PlayerGui = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	if not PlayerGui then task.wait(0.1) end
+until PlayerGui
+
 
 -- // Settings
 local ACCENT       = Color3.fromRGB(99, 179, 255)
