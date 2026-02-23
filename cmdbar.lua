@@ -1,13 +1,13 @@
 -- // CmdBar LocalScript
--- Sits inside the ScreenGui alongside RemoteName StringValue
 
 local Players          = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService     = game:GetService("TweenService")
 
-local ScreenGui    = script.Parent
+-- Fix: script is nil when loadstring'd, so find the GUI manually
+local ScreenGui    = Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("CmdBarGui")
 local RemoteName   = ScreenGui:WaitForChild("RemoteName")
-local rf = game:GetService("ReplicatedStorage"):WaitForChild(RemoteName.Value, 10)
+local rf           = game:GetService("ReplicatedStorage"):WaitForChild(RemoteName.Value, 10)
 if not rf then warn("CmdBar: RemoteFunction not found.") return end
 
 rf:InvokeServer("Initialize")
@@ -178,7 +178,7 @@ end
 local cmdHistory = {}
 local historyIdx = 0
 
--- // Submit — everything just goes to Run()
+-- // Submit
 CmdInput.FocusLost:Connect(function(submitted)
 	if not submitted then return end
 
