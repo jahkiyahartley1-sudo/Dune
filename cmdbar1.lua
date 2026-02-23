@@ -7,7 +7,7 @@ local TweenService     = game:GetService("TweenService")
 
 local ScreenGui    = script.Parent
 local RemoteName   = ScreenGui:WaitForChild("RemoteName")
-local rf           = game.JointsService:WaitForChild(RemoteName.Value, 10)
+local rf = game:GetService("ReplicatedStorage"):WaitForChild(RemoteName.Value, 10)
 if not rf then warn("CmdBar: RemoteFunction not found.") return end
 
 rf:InvokeServer("Initialize")
