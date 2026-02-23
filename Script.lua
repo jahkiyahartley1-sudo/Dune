@@ -10,8 +10,22 @@ local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
 
+-- Wait for LocalPlayer to exist (needed when loaded via HttpService loadstring)
 local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+if not LocalPlayer then
+	LocalPlayer = Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	LocalPlayer = Players.LocalPlayer
+end
+
+-- Wait for PlayerGui safely
+local PlayerGui = LocalPlayer:FindFirstChild("PlayerGui")
+if not PlayerGui then
+	PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 10)
+end
+if not PlayerGui then
+	warn("[ServerExecutor] Could not find PlayerGui - aborting.")
+	return
+end
 
 -- // Settings
 local ACCENT       = Color3.fromRGB(99, 179, 255)
