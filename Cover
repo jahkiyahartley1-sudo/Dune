@@ -1,0 +1,8 @@
+-- Cover
+return {[1]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;color={[1]=27.000000290572643;[2]=42.000001296401024;[3]=53.00000064074993;};
+anchored=true;cancollide=true;transparency=0.5;texture="Glass";position={[1]=-41.0291748046875;[2]=2.4499998092651367;[3]=6.5277509689331055;};
+locked=false;cframe={[1]=-41.0291748046875;[2]=2.4499998092651367;[3]=6.5277509689331055;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+shape="Block";size={[1]=36;[2]=3.5;[3]=55;};
+};
+}
