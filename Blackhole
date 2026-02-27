@@ -3,7 +3,7 @@ return {[1]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth"
 reflectance=0;particle4={lockedtopart=true;acceleration=-0;spreadangle=0;color={[1]=0;[2]=0;[3]=0;};
 rate=9999;orientation="FacingCamera";rotspeed="0";transparency="0.949999988079071";lifetime="0.10000000149011612";speed="0";rotation="15,300";size="7,7";texture="http://www.roblox.com/asset/?id=8821337290";};
 color={[1]=17.00000088661909;[2]=17.00000088661909;[3]=17.00000088661909;};
-anchored=true;locked=false;cframe={[1]=-563.3804931640625;[2]=625.068359375;[3]=-2442.19677734375;[4]=1;[5]=0;[6]=-0;[7]=0;[8]=1;[9]=0;[10]=-0;[11]=0;[12]=1;};
+anchored=true;locked=false;cframe={[1]=-550.83203125;[2]=626.5062866210938;[3]=-2451.93212890625;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
 size={[1]=25;[2]=25;[3]=25;};
 particle2={lockedtopart=true;acceleration=-0;spreadangle=360;color={[1]=255;[2]=85;[3]=0;};
 rate=7;orientation="FacingCamera";rotspeed="-100,100";transparency="0.699999988079071";lifetime="1.5";speed="0.0010000000474974513";rotation="-360,360";size="25,25";texture="rbxassetid://1075864321";};
@@ -15,14 +15,14 @@ particle3={lockedtopart=true;acceleration=-0;spreadangle=360;color={[1]=255;[2]=
 rate=5;orientation="VelocityPerpendicular";rotspeed="-100,100";transparency="1";lifetime="1.5";speed="0.0010000000474974513";rotation="-360,360";size="30,30";texture="rbxassetid://7216848832";};
 particle5={lockedtopart=true;acceleration=-0;spreadangle=155;color={[1]=255;[2]=0;[3]=0;};
 rate=9999;orientation="VelocityPerpendicular";rotspeed="1000";transparency="0.75";attachmentindex=1;lifetime="0.05000000074505806";speed="0.07500000298023224";rotation="1,1000";size="30,30";texture="http://www.roblox.com/asset/?id=8821337290";};
-transparency=0;name="Part";position={[1]=-563.3804931640625;[2]=625.068359375;[3]=-2442.19677734375;};
+transparency=0;name="Part";position={[1]=-550.83203125;[2]=626.5062866210938;[3]=-2451.93212890625;};
 pointlight={lighttype="PointLight";color={[1]=255;[2]=85;[3]=0;};
 brightness=5;range=5;shadows=false;};
 shape="Ball";cancollide=true;texture="Neon";};
 [2]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
 reflectance=0;color={[1]=255;[2]=255;[3]=0;};
-anchored=true;shape="Ball";texture="ForceField";transparency=0;name="Part";position={[1]=-563.3804931640625;[2]=625.068359375;[3]=-2442.19677734375;};
-locked=false;cframe={[1]=-563.3804931640625;[2]=625.068359375;[3]=-2442.19677734375;[4]=1;[5]=0;[6]=-0;[7]=0;[8]=1;[9]=0;[10]=-0;[11]=0;[12]=1;};
+anchored=true;shape="Ball";texture="ForceField";transparency=0;name="Part";position={[1]=-550.83203125;[2]=626.5062866210938;[3]=-2451.93212890625;};
+locked=false;cframe={[1]=-550.83203125;[2]=626.5062866210938;[3]=-2451.93212890625;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
 cancollide=true;size={[1]=30.5;[2]=30.5;[3]=30.5;};
 };
 }
