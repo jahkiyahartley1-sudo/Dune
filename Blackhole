@@ -1,0 +1,26 @@
+-- Model
+return {[1]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;particle4={lockedtopart=true;acceleration=-0;spreadangle=0;color={[1]=0;[2]=0;[3]=0;};
+rate=inf;rotspeed="0";transparency="0.949999988079071";lifetime="0.10000000149011612";speed="0";rotation="15,300";size="7,7";texture="http://www.roblox.com/asset/?id=8821337290";};
+color={[1]=17.00000088661909;[2]=17.00000088661909;[3]=17.00000088661909;};
+anchored=true;locked=false;cframe={[1]=-485.7381591796875;[2]=625.068359375;[3]=-2493.535400390625;[4]=1;[5]=0;[6]=-0;[7]=0;[8]=1;[9]=0;[10]=-0;[11]=0;[12]=1;};
+size={[1]=25;[2]=25;[3]=25;};
+particle2={lockedtopart=true;acceleration=-0;spreadangle=360;color={[1]=255;[2]=85;[3]=0;};
+rate=7;rotspeed="-100,100";transparency="0.699999988079071";lifetime="1.5";speed="0.0010000000474974513";rotation="-360,360";size="25,25";texture="rbxassetid://1075864321";};
+particle={lockedtopart=true;acceleration=-0;spreadangle=360;color={[1]=255;[2]=85;[3]=0;};
+rate=7;rotspeed="-150,150";transparency="1";lifetime="1.5";speed="0.0010000000474974513";rotation="-360,360";size="20,20";texture="rbxassetid://7216850580";};
+attachment={visible=false;name="Attachment";position={[1]=0;[2]=0;[3]=0;};
+};
+particle3={lockedtopart=true;acceleration=-0;spreadangle=360;color={[1]=255;[2]=85;[3]=0;};
+rate=5;rotspeed="-100,100";transparency="1";lifetime="1.5";speed="0.0010000000474974513";rotation="-360,360";size="30,30";texture="rbxassetid://7216848832";};
+transparency=0;name="Part";position={[1]=-485.7381591796875;[2]=625.068359375;[3]=-2493.535400390625;};
+pointlight={lighttype="PointLight";color={[1]=255;[2]=85;[3]=0;};
+brightness=5;range=5;shadows=false;};
+shape="Ball";cancollide=true;texture="Neon";};
+[2]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;color={[1]=255;[2]=255;[3]=0;};
+anchored=true;locked=false;cframe={[1]=-485.7381591796875;[2]=625.068359375;[3]=-2493.535400390625;[4]=1;[5]=0;[6]=-0;[7]=0;[8]=1;[9]=0;[10]=-0;[11]=0;[12]=1;};
+size={[1]=30.5;[2]=30.5;[3]=30.5;};
+transparency=0;name="Part";position={[1]=-485.7381591796875;[2]=625.068359375;[3]=-2493.535400390625;};
+shape="Ball";cancollide=true;texture="ForceField";};
+}
