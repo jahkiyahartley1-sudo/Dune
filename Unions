@@ -1,0 +1,35 @@
+-- Model
+return {[1]={reflectance=0;shape="Negate";color={[1]=255;[2]=255;[3]=255;};
+anchored=true;texture="Plastic";isnegate=true;uniongroup=1;transparency=0.10000000149011612;name="NegativePart";position={[1]=-197;[2]=13.69999885559082;[3]=170;};
+locked=false;cframe={[1]=-197;[2]=13.69999885559082;[3]=170;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=false;size={[1]=20;[2]=20;[3]=20;};
+};
+[2]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;shape="Block";color={[1]=163.00000548362732;[2]=162.00000554323196;[3]=165.00000536441803;};
+anchored=false;texture="Plastic";isnegate=false;uniongroup=1;transparency=0;name="Part";position={[1]=-197;[2]=8.699997901916504;[3]=170;};
+locked=false;cframe={[1]=-197;[2]=8.699997901916504;[3]=170;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=true;size={[1]=26;[2]=16;[3]=24;};
+};
+[3]={reflectance=0;shape="Negate";color={[1]=255;[2]=255;[3]=255;};
+anchored=true;texture="Plastic";isnegate=true;uniongroup=2;transparency=0.10000000149011612;name="NegativePart";position={[1]=-196.5;[2]=5.699985504150391;[3]=148.5;};
+locked=false;cframe={[1]=-196.5;[2]=5.699985504150391;[3]=148.5;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=false;size={[1]=23;[2]=14;[3]=9;};
+};
+[4]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;shape="Block";color={[1]=163.00000548362732;[2]=162.00000554323196;[3]=165.00000536441803;};
+anchored=false;texture="Plastic";isnegate=false;uniongroup=2;transparency=0;name="Part";position={[1]=-196.5;[2]=8.19999885559082;[3]=148.5;};
+locked=false;cframe={[1]=-196.5;[2]=8.19999885559082;[3]=148.5;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=true;size={[1]=13;[2]=15;[3]=13;};
+};
+[5]={reflectance=0;shape="Negate";color={[1]=255;[2]=255;[3]=255;};
+anchored=true;texture="Plastic";isnegate=true;uniongroup=3;transparency=0.10000000149011612;name="NegativePart";position={[1]=-196.5;[2]=5.6999969482421875;[3]=134.5;};
+locked=false;cframe={[1]=-196.5;[2]=5.6999969482421875;[3]=134.5;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=false;size={[1]=23;[2]=14;[3]=9;};
+};
+[6]={surface={Top="Smooth";Front="Smooth";Bottom="Smooth";Right="Smooth";Left="Smooth";Back="Smooth";};
+reflectance=0;shape="Block";color={[1]=163.00000548362732;[2]=162.00000554323196;[3]=165.00000536441803;};
+anchored=false;texture="Plastic";isnegate=false;uniongroup=3;transparency=0;name="Part";position={[1]=-196.5;[2]=8.200010299682617;[3]=134.5;};
+locked=false;cframe={[1]=-196.5;[2]=8.200010299682617;[3]=134.5;[4]=1;[5]=0;[6]=0;[7]=0;[8]=1;[9]=0;[10]=0;[11]=0;[12]=1;};
+cancollide=true;size={[1]=13;[2]=15;[3]=13;};
+};
+}
