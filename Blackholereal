@@ -1201,7 +1201,7 @@ flipbooklayout="Enum.ParticleFlipbookLayout.None";orientation="Enum.ParticleOrie
 };
 zoffset=4;rotation={[1]=0;[2]=0;};
 };
-anchored=false;particle={lockedtopart=true;spreadangle={[1]=0;[2]=0;};
+anchored=true;particle={lockedtopart=true;spreadangle={[1]=0;[2]=0;};
 color={[1]=29;[2]=138;[3]=255;};
 drag=5;colordata={[1]={b=255;t=0;g=138;r=29;};
 [2]={b=56;t=1;g=149;r=255;};
